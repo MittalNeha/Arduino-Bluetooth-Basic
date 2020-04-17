@@ -21,7 +21,9 @@ public class SplashScreen extends Activity {
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-                    Intent intent = new Intent(SplashScreen.this,DeviceList.class);
+//                    Intent intent = new Intent(SplashScreen.this,DeviceList.class);
+//                    Intent intent = new Intent(SplashScreen.this,ledControl.class);
+                      Intent intent = new Intent(SplashScreen.this,RoomTabsActivity.class);
                     startActivity(intent);
                 }
             }

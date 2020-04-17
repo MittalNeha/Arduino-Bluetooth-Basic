@@ -1,6 +1,6 @@
 package com.led_on_off.led;
 
-import android.support.v7.app.ActionBarActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,7 +9,6 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -20,7 +19,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 
-public class ledControl extends ActionBarActivity {
+public class ledControl extends AppCompatActivity {
 
    // Button btnOn, btnOff, btnDis;
     Button On, Off, Discnt, Abt;
@@ -49,7 +48,12 @@ public class ledControl extends ActionBarActivity {
         Discnt = (Button)findViewById(R.id.dis_btn);
         Abt = (Button)findViewById(R.id.abt_btn);
 
-        new ConnectBT().execute(); //Call the class to connect
+//        new ConnectBT().execute(); //Call the class to connect
+
+        On.setText("ON");
+        Off.setText("OFF");
+        Discnt.setText("DISCONNECT");
+        Abt.setText("ABOUT");
 
         //commands to be sent to bluetooth
         On.setOnClickListener(new View.OnClickListener()
@@ -134,11 +138,11 @@ public class ledControl extends ActionBarActivity {
 
     public  void about(View v)
     {
-        if(v.getId() == R.id.abt)
-        {
-            Intent i = new Intent(this, AboutActivity.class);
-            startActivity(i);
-        }
+//        if(v.getId() == R.id.abt)
+//        {
+//            Intent i = new Intent(this, AboutActivity.class);
+//            startActivity(i);
+//        }
     }
 
     @Override

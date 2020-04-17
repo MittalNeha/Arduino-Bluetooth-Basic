@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfigureRoom">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="@dimen/activity_horizontal_margin"
+            android:layout_height="@dimen/activity_vertical_margin"
+            android:id="@+id/itemTxt"
+            android:gravity="left" />
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/configBtn"
+        android:layout_width="250dp"
+        android:layout_height="38dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Configure"
+        android:gravity="center_horizontal"
+        android:textAlignment="center" />
+
+</FrameLayout>

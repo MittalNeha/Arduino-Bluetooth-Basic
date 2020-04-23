@@ -15,7 +15,10 @@ import android.view.View;
 
 import com.led_on_off.led.ui.main.SectionsPagerAdapter;
 
+import java.util.List;
+
 public class RoomTabsActivity extends AppCompatActivity {
+    List<SwitchBoard> rooms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -76,7 +76,10 @@ public class DeviceList extends AppCompatActivity
         {
             for(BluetoothDevice bt : pairedDevices)
             {
-                list.add(bt.getName() + "\n" + bt.getAddress()); //Get the device's name and the address
+                final int majorDeviceClass = bt.getBluetoothClass().getMajorDeviceClass();
+                if((majorDeviceClass & 0x1F00) == 0x1F00) {
+                    list.add(bt.getName() + "\n" + bt.getAddress()); //Get the device's name and the address
+                }
             }
         }
         else

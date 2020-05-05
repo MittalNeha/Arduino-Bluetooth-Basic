@@ -48,7 +48,7 @@ public class ledControl extends AppCompatActivity {
         Discnt = (Button)findViewById(R.id.dis_btn);
         Abt = (Button)findViewById(R.id.abt_btn);
 
-//        new ConnectBT().execute(); //Call the class to connect
+        new ConnectBT().execute(); //Call the class to connect
 
         On.setText("ON");
         Off.setText("OFF");

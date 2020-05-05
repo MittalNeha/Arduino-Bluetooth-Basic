@@ -88,7 +88,6 @@ public class PlaceholderFragment extends Fragment implements View.OnClickListene
 
             Switch onOff = new Switch(this.getActivity());
             onOff.setChecked(false);
-//            onOff.setGravity(Gravity.END);
             RelativeLayout.LayoutParams params_switch = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             params_switch.addRule(RelativeLayout.RIGHT_OF, name.getId());
             params_switch.topMargin = params.topMargin;

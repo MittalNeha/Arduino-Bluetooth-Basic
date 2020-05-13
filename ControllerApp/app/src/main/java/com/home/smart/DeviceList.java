@@ -1,4 +1,4 @@
-package com.led_on_off.led;
+package com.home.smart;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
@@ -102,7 +102,7 @@ public class DeviceList extends AppCompatActivity
             String address = info.substring(info.length() - 17);
 
             // Make an intent to start next activity.
-            Intent i = new Intent(DeviceList.this, ledControl.class);
+            Intent i = new Intent(DeviceList.this, deviceControl.class);
 
             //Change the activity.
             i.putExtra(EXTRA_ADDRESS, address); //this will be received at ledControl (class) Activity

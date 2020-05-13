@@ -1,7 +1,8 @@
-package com.led_on_off.led;
+package com.home.smart;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -9,21 +10,26 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.os.AsyncTask;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.io.IOException;
 import java.util.UUID;
 
 
-public class ledControl extends AppCompatActivity {
+public class deviceControl extends AppCompatActivity {
 
    // Button btnOn, btnOff, btnDis;
-    Button On, Off, Discnt, Abt;
+    Button GetState, SetState, CtrlSwitch, Abt, SendCommand, GetResponse;
     String address = null;
+    TextInputLayout inputText;
+    TextView response_txt;
     private ProgressDialog progress;
     BluetoothAdapter myBluetooth = null;
     BluetoothSocket btSocket = null;
@@ -40,49 +46,109 @@ public class ledControl extends AppCompatActivity {
         address = newint.getStringExtra(DeviceList.EXTRA_ADDRESS); //receive the address of the bluetooth device
 
         //view of the ledControl
-        setContentView(R.layout.activity_led_control);
+        setContentView(R.layout.activity_device_control);
 
         //call the widgets
-        On = (Button)findViewById(R.id.on_btn);
-        Off = (Button)findViewById(R.id.off_btn);
-        Discnt = (Button)findViewById(R.id.dis_btn);
+        GetState = (Button)findViewById(R.id.get_state);
+        SetState = (Button)findViewById(R.id.set_state);
+        CtrlSwitch = (Button)findViewById(R.id.ctrl_switch);
         Abt = (Button)findViewById(R.id.abt_btn);
+        SendCommand = (Button) findViewById(R.id.send_btn);
+        GetResponse = (Button) findViewById(R.id.recv_btn);
+        inputText = findViewById(R.id.cmd_txt);
+        response_txt = findViewById(R.id.recv_txt);
 
         new ConnectBT().execute(); //Call the class to connect
 
-        On.setText("ON");
-        Off.setText("OFF");
-        Discnt.setText("DISCONNECT");
-        Abt.setText("ABOUT");
-
         //commands to be sent to bluetooth
-        On.setOnClickListener(new View.OnClickListener()
+        GetState.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if(btSocket != null) {
+                    try{
+                        String text = inputText.getEditText().getText().toString();
+                        btSocket.getOutputStream().write(0);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        SetState.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if(btSocket != null) {
+                    try{
+                        btSocket.getOutputStream().write(1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        CtrlSwitch.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                turnOnLed();      //method to turn on
+                if(btSocket != null) {
+                    try{
+                        btSocket.getOutputStream().write(2);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
 
-        Off.setOnClickListener(new View.OnClickListener() {
+        SendCommand.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                turnOffLed();   //method to turn off
+            public void onClick(View view) {
+                if(btSocket != null) {
+                    try{
+                        String text = inputText.getEditText().getText().toString();
+                        btSocket.getOutputStream().write(text.getBytes());
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
 
-        Discnt.setOnClickListener(new View.OnClickListener()
-        {
+        GetResponse.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                Disconnect(); //close connection
+            public void onClick(View view) {
+                String resp = getResponse();
+                response_txt.setText(resp);
             }
         });
+    }
+
+    private String getResponse() {
+        String resp_str = "";
+        byte[] response = new byte[200];
+        int numBytes = 0;
+        if(btSocket !=null && btSocket.isConnected() ) {
+            try {
+                if(btSocket.getInputStream().available() > 0) {
+                    numBytes = btSocket.getInputStream().read(response);
+                }
+                if(numBytes > 0) {
+                    resp_str = new String(response);
+                    Log.d(getClass().toString(), "new String " + resp_str);
+                }
 
 
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return resp_str;
     }
 
     private void Disconnect()
@@ -98,36 +164,6 @@ public class ledControl extends AppCompatActivity {
         }
         finish(); //return to the first layout
 
-    }
-
-    private void turnOffLed()
-    {
-        if (btSocket!=null)
-        {
-            try
-            {
-                btSocket.getOutputStream().write("0".toString().getBytes());
-            }
-            catch (IOException e)
-            {
-                msg("Error");
-            }
-        }
-    }
-
-    private void turnOnLed()
-    {
-        if (btSocket!=null)
-        {
-            try
-            {
-                btSocket.getOutputStream().write("1".toString().getBytes());
-            }
-            catch (IOException e)
-            {
-                msg("Error");
-            }
-        }
     }
 
     // fast way to call Toast
@@ -176,7 +212,7 @@ public class ledControl extends AppCompatActivity {
         @Override
         protected void onPreExecute()
         {
-            progress = ProgressDialog.show(ledControl.this, "Connecting...", "Please wait!!!");  //show a progress dialog
+            progress = ProgressDialog.show(deviceControl.this, "Connecting...", "Please wait!!!");  //show a progress dialog
         }
 
         @Override

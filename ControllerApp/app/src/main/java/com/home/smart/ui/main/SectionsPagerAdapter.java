@@ -1,4 +1,4 @@
-package com.led_on_off.led.ui.main;
+package com.home.smart.ui.main;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.led_on_off.led.R;
+import com.home.smart.R;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to

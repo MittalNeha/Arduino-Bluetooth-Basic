@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/configApp"
-    tools:context="com.led_on_off.led.ui.main.PlaceholderFragment">
+    tools:context="com.home.smart.ui.main.PlaceholderFragment">
 
     <TextView
         android:layout_width="match_parent"

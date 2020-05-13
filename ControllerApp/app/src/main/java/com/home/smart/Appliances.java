@@ -1,4 +1,4 @@
-package com.led_on_off.led;
+package com.home.smart;
 
 public class Appliances {
     int type;

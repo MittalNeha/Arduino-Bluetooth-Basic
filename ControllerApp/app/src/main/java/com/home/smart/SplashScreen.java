@@ -1,4 +1,4 @@
-package com.led_on_off.led;
+package com.home.smart;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +22,7 @@ public class SplashScreen extends Activity {
                     e.printStackTrace();
                 }finally{
                     Intent intent = new Intent(SplashScreen.this,DeviceList.class);
-//                    Intent intent = new Intent(SplashScreen.this,ledControl.class);
+//                    Intent intent = new Intent(SplashScreen.this,deviceControl.class);
 //                      Intent intent = new Intent(SplashScreen.this,RoomTabsActivity.class);
                     startActivity(intent);
                 }

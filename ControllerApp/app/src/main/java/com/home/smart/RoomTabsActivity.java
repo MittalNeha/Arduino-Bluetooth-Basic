@@ -1,4 +1,4 @@
-package com.led_on_off.led;
+package com.home.smart;
 
 import android.os.Bundle;
 
@@ -9,11 +9,9 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
-import com.led_on_off.led.ui.main.SectionsPagerAdapter;
+import com.home.smart.ui.main.SectionsPagerAdapter;
 
 import java.util.List;
 

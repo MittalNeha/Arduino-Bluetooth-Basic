@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="1"
+    android:layout_gravity="center"
+    android:numColumns="1"
+    android:padding="4dp"
+    android:scrollbars="none"
+    android:stretchMode="columnWidth"
+    android:visibility="visible"
+    android:id="@+id/submitPopup"
+    android:background="#B3A9A9">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="15dp"
+        android:orientation="vertical"
+        android:outlineProvider="paddedBounds"
+        android:background="#E28282">
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Fan"
+            android:textColor="@color/white"
+            android:textSize="40dp"
+            android:id="@+id/btnfan"
+            android:gravity="center_horizontal"
+            android:focusable="true"
+            android:clickable="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="15dp"
+        android:orientation="vertical"
+        android:background="#E28282">
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Tube Light"
+            android:textSize="40dp"
+            android:textColor="@color/white"
+            android:id="@+id/btnlight"
+            android:gravity="center_horizontal"
+            android:focusable="true"
+            android:clickable="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="15dp"
+
+        android:orientation="vertical"
+        android:background="#E28282">
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Bulb"
+            android:textSize="40dp"
+            android:textColor="@color/white"
+            android:id="@+id/btnbulb"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="15dp"
+
+        android:orientation="vertical"
+        android:background="#E28282">
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Plug Point"
+            android:textSize="40dp"
+            android:textColor="@color/white"
+            android:id="@+id/btnplugpoint"
+            android:gravity="center_horizontal"
+            android:focusable="true"
+            android:clickable="true"/>
+    </LinearLayout>
+
+</GridLayout>

@@ -187,7 +187,7 @@ void write_config(const String &config_str)
 void control_appliance(String &msg)
 {
   char buff[20];
-  int appliance_idx, state;
+  int appliance_idx = -1, state = -1;
   
   msg.toCharArray(buff, sizeof(buff));
 
@@ -197,16 +197,14 @@ void control_appliance(String &msg)
 
   if(str != NULL)
   {
-    appliance_idx = int(str[0]);
-    Serial.println(str);
+    appliance_idx = atoi(str);
   }
-    
-  str = strtok_r(p, ":", &p);
-Serial.println(str);
+  Serial.print("p= ");
+  Serial.println(p);  
+  
   if(p != NULL)
   {
-    Serial.println(p);
-    state = int(p);
+    state = atoi(p);
   }
 
   Serial.print("Appliance Idx : ");

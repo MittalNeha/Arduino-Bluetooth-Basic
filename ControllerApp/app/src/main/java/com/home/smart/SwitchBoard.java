@@ -32,7 +32,7 @@ public class SwitchBoard {
 
     private void parseBoardConfig(String board_config) {
         Log.d(TAG, "parseBoardConfig: " + board_config);
-        String segments[] = board_config.split("|");
+        String segments[] = board_config.split("\\|");
 
         for(int i = 1; i < segments.length; i++) {
             String data[] = segments[i].split(":");
@@ -70,6 +70,11 @@ public class SwitchBoard {
         } else {
             switches.set(index, new Appliances(type, status));
         }
+    }
+
+    public void setSwitchState(int index, int status) {
+        Appliances ap = switches.get(index);
+        switches.set(index, new Appliances(ap.type, status));
     }
 
     public int getStatus() {

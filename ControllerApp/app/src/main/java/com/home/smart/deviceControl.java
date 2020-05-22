@@ -132,13 +132,14 @@ public class deviceControl extends AppCompatActivity {
                 if(btSocket != null) {
                     try {
                         btSocket.getOutputStream().write(1);
+                        Thread.sleep(200);
                         btSocket.getOutputStream().write(config.getBytes());
                         Thread.sleep(2000);
                     } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-//                Disconnect();
+                Disconnect();
             }
         });
 
@@ -305,6 +306,8 @@ public class deviceControl extends AppCompatActivity {
 
         if(board_state == -1) {
             ShowPopupWindow(id);
+        } else {
+            sb.setSwitchState(id, state);
         }
     }
 
@@ -334,7 +337,7 @@ public class deviceControl extends AppCompatActivity {
                     numBytes = btSocket.getInputStream().read(response);
                 }
                 if(numBytes > 0) {
-                    resp_str = new String(response);
+                    resp_str = new String(response, 0, numBytes);
                     Log.d(getClass().toString(), "new String " + resp_str);
                 }
 

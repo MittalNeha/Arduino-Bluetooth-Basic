@@ -108,21 +108,6 @@ public class deviceControl extends AppCompatActivity {
             response_txt.setVisibility(View.INVISIBLE);
             inputText.setVisibility(View.INVISIBLE);
         }
-        String config = getDeviceConfig();
-        sb = new SwitchBoard(config);
-        if(sb.getStatus() == 0) {
-            //Board is unconfigured, show the view to configure
-            titleText.setText("Room 1");
-            sb.setBoardName(titleText.getText().toString());
-            board_state = -1;
-            setAppliancesConfigLayout();
-        } else {
-            //Board is configured.
-            board_state = 1;
-            titleText.setText(sb.getBoardName());
-
-            setAppliancesControlLayout(sb.getSwitches());
-        }
         bDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,74 +127,29 @@ public class deviceControl extends AppCompatActivity {
                 Disconnect();
             }
         });
+    }
 
-        //commands to be sent to bluetooth
-//        GetState.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                if(btSocket != null) {
-//                    try{
-//                        String text = inputText.getEditText().getText().toString();
-//                        btSocket.getOutputStream().write(0);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-//
-//        SetState.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                if(btSocket != null) {
-//                    try{
-//                        btSocket.getOutputStream().write(1);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-//
-//        CtrlSwitch.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                if(btSocket != null) {
-//                    try{
-//                        btSocket.getOutputStream().write(2);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-//
-//        SendCommand.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(btSocket != null) {
-//                    try{
-//                        String text = inputText.getEditText().getText().toString();
-//                        btSocket.getOutputStream().write(text.getBytes());
-//
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-//
-//        GetResponse.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String resp = getResponse();
-//                response_txt.setText(resp);
-//            }
-//        });
+    void btConnectionFinished(boolean isBtConnected) {
+        if(isBtConnected) {
+
+            String config = getDeviceConfig();
+            sb = new SwitchBoard(config);
+            if(sb.getStatus() == 0) {
+                //Board is unconfigured, show the view to configure
+                titleText.setText("Room 1");
+                sb.setBoardName(titleText.getText().toString());
+                board_state = -1;
+                setAppliancesConfigLayout();
+            } else {
+                //Board is configured.
+                board_state = 1;
+                titleText.setText(sb.getBoardName());
+
+                setAppliancesControlLayout(sb.getSwitches());
+            }
+
+        }
+
     }
 
     private void setAppliancesConfigLayout() {
@@ -543,6 +483,7 @@ public class deviceControl extends AppCompatActivity {
                 msg("Connected.");
                 isBtConnected = true;
             }
+            btConnectionFinished(isBtConnected);
             progress.dismiss();
         }
     }

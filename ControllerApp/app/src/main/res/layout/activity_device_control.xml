@@ -8,10 +8,10 @@
     android:background="#212121"
     android:id="@+id/dev_ctrl">
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test Commands "
+        android:text="Room Name "
         android:id="@+id/textView2"
         android:layout_alignParentTop="true"
         android:fontFamily="sans-serif-smallcaps"

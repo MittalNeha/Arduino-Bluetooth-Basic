@@ -33,7 +33,8 @@ String save_config = "";
 
  int board_state = 0;
  int num_relays = 4;
- int RELAYPIN = 4;
+ int RELAYPIN   = 4;
+ int RESETPIN   = 13;
 
   SoftwareSerial btSerial(BT_RXPIN, BT_TXPIN);
 
@@ -56,11 +57,20 @@ void setup() {
   for (int i = 0; i < num_relays; i++) {
     pinMode(RELAYPIN + i, OUTPUT);
   }
+
+  pinMode(RESETPIN, INPUT);
+  
 }
 
 void loop() {
   String msg = "";
   int cmd = -1;
+
+  if(isResetBoard()) {
+    // Short all the relays
+    shortAllRelays();
+    //TODO Update the saved config and communicate back to the app, if connected.
+  }
   if( !btSerial.available())
   {
     return;
@@ -218,4 +228,19 @@ void control_appliance(String &msg)
     digitalWrite(RELAYPIN + appliance_idx, LOW);
   else if(1 == state)
     digitalWrite(RELAYPIN + appliance_idx, HIGH);
+}
+
+bool isResetBoard() {
+  int in = digitalRead(RESETPIN);
+  if( HIGH == in ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+void shortAllRelays() {
+  for (int i = 0; i < num_relays; i++) {
+    digitalWrite(RELAYPIN + i, HIGH);
+  }
 }
